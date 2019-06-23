@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>InstaPay client app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<% include ./comm_navbar.html %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Channels</h3>
+        </div>
+          <% include ./channel_menu.html %>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <h1>Requests I received</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>CID</th>
+            <th>My address</th>
+            <th>Other address</th>
+            <th>My deposit</th>
+            <th>Other's deposit</th>
+            <th>Detail</th>
+            <th>Confirm</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < rcvdRequests.length; i++) {
+              var channelID = rcvdRequests[i].channelID;
+              var myAddress = rcvdRequests[i].myAddress;
+              var otherAddress = rcvdRequests[i].otherAddress;
+              var otherDeposit = rcvdRequests[i].otherDeposit;
+              var openTimeout = rcvdRequests[i].openTimeout;
+              var closeTimeInterval = rcvdRequests[i].closeTimeInterval;
+              var modalID = 'detailModal' + i; %>
+              <tr>
+                <form method="post" action="/channel/request/openConfirm">
+                  <td><%= channelID %></td>
+                  <td><%= myAddress %></td>
+                  <td><%= otherAddress %></td>
+                  <td><input type="text" size="5" id="my_deposit" name="my_deposit"></td>
+                  <td><%= otherDeposit %></td>
+                  <td><button type="button" id="detail_modal" class="btn btn-light" data-toggle="modal" data-target="#<%= modalID %>">detail</button></td>
+                  <input type="hidden" id="ch_id" name="ch_id" value="<%= channelID %>">
+                  <td><button type="submit" class="btn btn-light">confirm</button></td>
+                </form>
+              </tr>
+              <div class="modal" id="<%= modalID %>">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detail request information</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="font-weight-bold">Expiration: <%= openTimeout %></p>
+                      <p class="font-weight-bold">Closing response time: <%= closeTimeInterval %> seconds</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% } %>
+        </tbody>
+      </table>
+    </br>
+      <h1>Requests I sent</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>CID</th>
+            <th>My address</th>
+            <th>Other address</th>
+            <th>My deposit</th>
+            <th>Other's deposit</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < sentRequests.length; i++) {
+              var channelID = sentRequests[i].channelID;
+              var myAddress = sentRequests[i].myAddress;
+              var myDeposit = sentRequests[i].myDeposit;
+              var otherAddress = sentRequests[i].otherAddress;
+              var openTimeout = sentRequests[i].openTimeout;
+              var closeTimeInterval = sentRequests[i].closeTimeInterval;
+              var modalID = 'detailModall' + i; %>
+              <tr>
+                <td><%= channelID %></td>
+                <td><%= myAddress %></td>
+                <td><%= otherAddress %></td>
+                <td><%= myDeposit %></td>
+                <td>PENDING</td>
+                <td><button type="button" id="detail_modal" class="btn btn-light" data-toggle="modal" data-target="#<%= modalID %>">detail</button></td>
+              </tr>
+              <div class="modal" id="<%= modalID %>">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detail request information</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="font-weight-bold">Expiration: <%= openTimeout %></p>
+                      <p class="font-weight-bold">Closing response time: <%= closeTimeInterval %> seconds</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

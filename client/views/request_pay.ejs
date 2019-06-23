@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>InstaPay client app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<% include ./comm_navbar.html %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Channels</h3>
+        </div>
+          <% include ./channel_menu.html %>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <h1>Pay to the channel</h1>
+      <form method="post" action="/channel/request/pay">
+        <div class="form-group">
+          <label for="ch_id">Channel to pay:</label>
+          <select class="form-control" id="ch_id" name="ch_id">
+            <% for (var i = 0; i < ids.length; i++) { %>
+                <option><%= ids[i] %></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="other_addr">Amount:</label>
+          <input type="text" class="form-control" id="amount" name="amount">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <h1>Pay to the address</h1>
+      <form method="post" action="/channel/request/payAddr">
+        <div class="form-group">
+          <label for="ch_id">Channel to use:</label>
+          <select class="form-control" id="ch_id" name="ch_id">
+            <% for (var i = 0; i < ids.length; i++) { %>
+                <option><%= ids[i] %></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="addr">Address to pay:</label>
+          <input type="text" class="form-control" id="addr" name="addr">
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount:</label>
+          <input type="text" class="form-control" id="amount" name="amount">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <h1>Pay through the invoice</h1>
+      <form method="post" action="/channel/request/payInvoice">
+        <div class="form-group">
+          <label for="ch_id">Channel to use:</label>
+          <select class="form-control" id="ch_id" name="ch_id">
+            <% for (var i = 0; i < ids.length; i++) { %>
+                <option><%= ids[i] %></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="invoice">Invoice:</label>
+          <input type="text" class="form-control" id="invoice" name="invoice">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

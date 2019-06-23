@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>InstaPay client app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<% include ./comm_navbar.html %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Accounts</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <h1>My accounts <button type="button" class="btn btn-light">Create new account</button></h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Public address</th>
+            <th>Deposit (in ETH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < my_accounts.length; i++) {
+              var address = my_accounts[i]['address'];
+              var balance = my_accounts[i]['balance']; %>
+              <tr><td><%= address %></td><td><%= balance %></td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

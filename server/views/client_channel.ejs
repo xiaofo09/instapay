@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>InstaPay server app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<% include ./comm_navbar.html %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <% include ./client_menu.html %>
+    </div>
+    <div class="col-md-10">
+      <h1>Clients Information</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>CID</th>
+            <th>Participant A's address</th>
+            <th>Particiapnt B's address</th>
+            <th>Participant A's deposit</th>
+            <th>Participant B's deposit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < channels.length; i++) {
+              var channelID = channels[i].channelID;
+              var aliceAddress = channels[i].aliceAddress;
+              var bobAddress = channels[i].bobAddress;
+              var aliceDeposit = channels[i].aliceDeposit;
+              var bobDeposit = channels[i].bobDeposit; %>
+              <tr>
+                <td><%= channelID %></td>
+                <td><%= aliceAddress %></td>
+                <td><%= bobAddress %></td>
+                <td><%= aliceDeposit %></td>
+                <td><%= bobDeposit %></td>
+              </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
