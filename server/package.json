@@ -16,7 +16,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "google-protobuf": "^3.8.0",
-    "grpc": "^1.21.1",
+    "grpc": "^1.24.9",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "solc": "^0.4.24",
