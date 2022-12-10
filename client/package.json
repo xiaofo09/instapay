@@ -14,7 +14,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "google-protobuf": "^3.8.0",
     "grpc": "^1.21.1",
     "http-errors": "~1.6.3",
